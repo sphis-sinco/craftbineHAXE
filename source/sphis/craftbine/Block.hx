@@ -1,5 +1,6 @@
 package sphis.craftbine;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 class Block extends FlxSprite
@@ -19,5 +20,15 @@ class Block extends FlxSprite
 		this.icon_index = index;
 		this.animation.frameIndex = this.icon_index;
 		return this;
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (FlxG.mouse.overlaps(this) && FlxG.mouse.pressed)
+		{
+			setPosition(FlxG.mouse.x - (this.width / 2), FlxG.mouse.y - (this.height / 2));
+		}
 	}
 }
