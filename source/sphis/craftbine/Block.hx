@@ -31,8 +31,6 @@ class Block extends FlxSprite
 
 		if (block_id != null)
 		{
-			this.block_id = block_id;
-
 			var block_asset:Array<String> = Assets.getText('assets/blocks/' + block_id + '.txt').split('\n');
 			trace(block_asset);
 
@@ -47,6 +45,7 @@ class Block extends FlxSprite
 			}
 
 			setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
+			this.block_id = block_id;
 		}
 		else
 		{
@@ -67,6 +66,7 @@ class Block extends FlxSprite
 	{
 		this.icon_index = index;
 		this.animation.frameIndex = this.icon_index;
+		this.block_id = null;
 
 		return this;
 	}

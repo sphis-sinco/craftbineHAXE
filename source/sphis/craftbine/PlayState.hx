@@ -55,19 +55,37 @@ class PlayState extends FlxState
 		blocks.add(stone_block);
 
 		block_to_place = new Block('stone');
-		
+
 		block_to_place.x += block_to_place.width * 15;
 		block_to_place.y += block_to_place.height * 12;
 
+		block_to_place.hsv_shader.saturation = 2;
 		block_to_place.alpha = .5;
 		block_to_place.selected_function = function(block:Block)
 		{
-			Block.DEFAULT_SELECTED_FUNCTION(block);
+			InitState.DEFAULT_BLOCK_SELECTED_FUNCTION(block);
 
 			if (FlxG.keys.justReleased.ENTER)
 			{
-				var new_block = new Block(block_to_place.block_id, block_to_place.x, block_to_place.y);
-				blocks.add(new_block);
+				var overlap:Bool = false;
+				var new_block = new Block(block_to_place.block_id, block_to_place.x, block_to_place.y).setIconIndex(block_to_place.icon_index);
+
+				for (block in blocks.members)
+					if (new_block.overlaps(block))
+						overlap = true;
+
+				if (!overlap)
+					blocks.add(new_block);
+			}
+
+			if (FlxG.keys.justReleased.DELETE)
+			{
+				for (block in blocks.members)
+					if (block.overlaps(block_to_place))
+					{
+						blocks.members.remove(block);
+						block.destroy();
+					}
 			}
 		};
 		add(block_to_place);
@@ -78,26 +96,5 @@ class PlayState extends FlxState
 		super.update(elapsed);
 
 		block_to_place.selected = selected_ID == 0;
-
-		if (FlxG.keys.justReleased.TAB)
-		{
-			if (FlxG.keys.pressed.SHIFT)
-			{
-				selected_ID--;
-			}
-			else
-			{
-				selected_ID++;
-			}
-
-			if (selected_ID < 0)
-				selected_ID = 0;
-
-			if (selected_ID > blocks.length)
-				selected_ID--;
-
-			for (block in blocks.members)
-				block.selected = selected_ID == block.ID;
-		}
 	}
 }
