@@ -15,6 +15,12 @@ class Block extends FlxSprite
 	public static var DEFAULT_SELECTED_FUNCTION:Block->Void = null;
 	public static var DEFAULT_UNSELECTED_FUNCTION:Block->Void = null;
 	public static var BLOCK_COUNT:Int = 0;
+	public static var BLOCK_LIST(get, never):Array<String>;
+
+	static function get_BLOCK_LIST():Array<String>
+	{
+		return Assets.getText('assets/blocks/list.txt').split('\n');
+	}
 
 	public var hsv_shader:HSVShader;
 
@@ -25,9 +31,9 @@ class Block extends FlxSprite
 		if (block_id != null)
 		{
 			var block_asset:Array<String> = Assets.getText('assets/blocks/' + block_id + '.txt').split('\n');
-			setIconIndex(Std.parseInt(block_asset[0])); // icon_index
+			setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
 
-			if (block_asset[1].toLowerCase() == 'true') // use_atlas
+			if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
 			{
 				loadGraphic('assets/blocks/atlas.png', true, 16, 16);
 			}
