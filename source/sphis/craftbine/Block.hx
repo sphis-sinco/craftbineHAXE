@@ -32,8 +32,6 @@ class Block extends FlxSprite
 		if (block_id != null)
 		{
 			var block_asset:Array<String> = Assets.getText('assets/blocks/' + block_id + '.txt').split('\n');
-			trace(block_asset);
-
 			if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
 			{
 				loadGraphic('assets/blocks/atlas.png', true, 16, 16);
