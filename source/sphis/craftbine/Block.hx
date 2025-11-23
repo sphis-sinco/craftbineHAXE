@@ -6,7 +6,7 @@ class Block extends FlxSprite
 {
 	public var icon_index:Int = 0;
 
-	override public function new(x:Float, y:Float)
+	override public function new(?x:Float, ?y:Float)
 	{
 		super(x, y);
 
@@ -14,9 +14,10 @@ class Block extends FlxSprite
 		// animation.pause();
 	}
 
-	public function setIconIndex(index:Int)
+	public function setIconIndex(index:Int):Block
 	{
 		this.icon_index = index;
 		this.animation.frameIndex = this.icon_index;
+		return this;
 	}
 }
