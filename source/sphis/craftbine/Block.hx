@@ -49,6 +49,7 @@ class Block extends FlxSprite
 				this.block_id = block_id;
 			}
 			catch (e) {
+				trace('"' + block_id + '"');
 				#if sys
 				trace(sys.FileSystem.readDirectory('assets/blocks/data'));
 				#end
