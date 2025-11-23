@@ -1,7 +1,6 @@
-package;
+package sphis.craftbine;
 
 import flixel.FlxState;
-import sphis.craftbine.Block;
 
 class PlayState extends FlxState
 {
