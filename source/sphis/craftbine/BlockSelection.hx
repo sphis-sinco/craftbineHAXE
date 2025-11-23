@@ -33,6 +33,11 @@ class BlockSelection extends FlxSubState
                 selected_block = block.block_id;
 			});
 
+            if (nb.block_id != null)
+                blocks.add(nb);
+            else 
+                continue;
+
 			x++;
             //                                            16.5 won't be 17, it'll be 16. I hope anyway.
 			if (x > FlxMath.roundDecimal(FlxG.width / 20, 0))
