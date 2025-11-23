@@ -29,7 +29,7 @@ class Block extends FlxSprite
 	{
 		super(x, y);
 
-		if (block_id != null)
+		if (block_id != null && (#if sys sys.FileSystem.exists #else Assets.exists #end ('assets/blocks/' + block_id + '.txt')))
 		{
 			var block_asset:Array<String> = #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/' + block_id + '.txt').split('\n');
 			if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
