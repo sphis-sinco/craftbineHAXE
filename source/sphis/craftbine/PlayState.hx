@@ -45,13 +45,20 @@ class PlayState extends FlxState
 		var grass_block = new Block('grass_block');
 		var stone_block = new Block('stone');
 
-		grass_block.x += grass_block.width;
-		stone_block.x += stone_block.width * 2;
+		grass_block.x += grass_block.width * 14;
+		stone_block.x += stone_block.width * 16;
+
+		grass_block.y += grass_block.height * 12;
+		stone_block.y += stone_block.height * 12;
 
 		blocks.add(grass_block);
 		blocks.add(stone_block);
 
 		block_to_place = new Block('stone');
+		
+		block_to_place.x += block_to_place.width * 15;
+		block_to_place.y += block_to_place.height * 12;
+
 		block_to_place.alpha = .5;
 		block_to_place.selected_function = function(block:Block)
 		{
