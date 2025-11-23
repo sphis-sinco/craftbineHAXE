@@ -23,6 +23,6 @@ class BlockSelection extends FlxSubState
 		super.update(elapsed);
 
 		if (FlxG.keys.justReleased.ESCAPE && FlxG.keys.pressed.SHIFT)
-			closeSubState();
+			close();
 	}
 }
