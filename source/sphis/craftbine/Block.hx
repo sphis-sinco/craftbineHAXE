@@ -22,7 +22,7 @@ class Block extends FlxSprite
 
 	static function get_BLOCK_LIST():Array<String>
 	{
-		return #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/list.txt').split('\n');
+		return #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/list.txt').split(' ');
 	}
 
 	public var hsv_shader:HSVShader;
