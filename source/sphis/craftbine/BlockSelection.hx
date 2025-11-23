@@ -16,7 +16,7 @@ class BlockSelection extends FlxSubState
 		super.create();
 
 		bg = new FlxSprite();
-		bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg.makeGraphic(FlxG.width, FlxG.height);
 		bg.alpha = .5;
 		add(bg);
 
@@ -74,7 +74,7 @@ class BlockSelection extends FlxSubState
 			if (selected_ID < 0)
 				selected_ID = 0;
 
-			if (selected_ID > blocks.length)
+			if (selected_ID > blocks.length - 1)
 				selected_ID--;
 		}
 

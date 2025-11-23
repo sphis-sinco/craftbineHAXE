@@ -55,6 +55,7 @@ class PlayState extends FlxState
 		blocks.add(stone_block);
 
 		block_to_place = new Block('stone');
+		Block.BLOCK_COUNT--;
 
 		block_to_place.x += block_to_place.width * 15;
 		block_to_place.y += block_to_place.height * 12;
