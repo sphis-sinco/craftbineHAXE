@@ -27,8 +27,8 @@ class Block extends FlxSprite
 		this.selected_function = selected_function ?? DEFAULT_SELECTED_FUNCTION;
 		this.unselected_function = unselected_function ?? DEFAULT_UNSELECTED_FUNCTION;
 
-		this.setID(BLOCK_COUNT);
-		BLOCK_COUNT++;
+		this.setID(Block.BLOCK_COUNT);
+		Block.BLOCK_COUNT += 1;
 
 		hsv_shader = new HSVShader(1, 1, 1);
 		this.shader = hsv_shader;

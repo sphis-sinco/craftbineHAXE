@@ -18,11 +18,11 @@ class InitState extends FlxState
 		Block.BLOCK_COUNT = 1;
 		Block.DEFAULT_UNSELECTED_FUNCTION = function(block:Block)
 		{
-			block.hsv_shader.saturation = 1;
+			block.hsv_shader.value = 1;
 		}
 		Block.DEFAULT_SELECTED_FUNCTION = function(block:Block)
 		{
-			block.hsv_shader.saturation = 0;
+			block.hsv_shader.value = 0.5;
 			if (FlxG.keys.anyJustReleased([A, LEFT]))
 			{
 				block.x -= block.width;
