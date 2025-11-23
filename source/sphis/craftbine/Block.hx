@@ -21,7 +21,7 @@ class Block extends FlxSprite
 	{
 		super(x, y);
 
-		loadGraphic('assets/images/blocks.png', true, 16, 16);
+		loadGraphic('assets/blocks/atlas.png', true, 16, 16);
 		// animation.pause();
 
 		this.selected_function = selected_function ?? DEFAULT_SELECTED_FUNCTION;
