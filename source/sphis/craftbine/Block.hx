@@ -48,7 +48,11 @@ class Block extends FlxSprite
 				setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
 				this.block_id = block_id;
 			}
-			catch (e) {}
+			catch (e) {
+				#if sys
+				trace(sys.FileSystem.readDirectory('assets/blocks/data'));
+				#end
+			}
 		}
 		else
 		{
