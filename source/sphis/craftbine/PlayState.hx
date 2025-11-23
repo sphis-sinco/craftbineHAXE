@@ -97,7 +97,7 @@ class PlayState extends FlxState
 
 		block_to_place.selected = selected_ID == 0;
 
-		if (FlxG.keys.justReleased.ESCAPE)
+		if (FlxG.keys.justReleased.ESCAPE && !FlxG.keys.pressed.SHIFT)
 		{
 			openSubState(new BlockSelection());
 		}
