@@ -17,6 +17,29 @@ class PlayState extends FlxState
 		blocks = new FlxTypedGroup<Block>();
 		add(blocks);
 
+		Block.DEFAULT_SELECTED_FUNCTION = function(block:Block)
+		{
+			Block.DEFAULT_SELECTED_FUNCTION(block);
+
+			for (other_block in blocks.members)
+			{
+				if (other_block.ID != block.ID)
+				{
+					if (block.overlaps(other_block))
+					{
+						if (FlxG.keys.anyJustReleased([A, LEFT]))
+							block.x += block.width;
+						if (FlxG.keys.anyJustReleased([D, RIGHT]))
+							block.x -= block.width;
+						if (FlxG.keys.anyJustReleased([W, UP]))
+							block.y += block.height;
+						if (FlxG.keys.anyJustReleased([S, DOWN]))
+							block.y -= block.height;
+					}
+				}
+			}
+		}
+
 		var grass_block = new Block().setIconIndex(0);
 		var stone_block = new Block().setIconIndex(1);
 
