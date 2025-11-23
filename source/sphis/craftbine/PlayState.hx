@@ -47,7 +47,7 @@ class PlayState extends FlxState
 			if (selected_ID < 0)
 				selected_ID = 0;
 
-			if (selected_ID >= blocks.length)
+			if (selected_ID > blocks.length)
 				selected_ID--;
 
 			for (block in blocks.members)
