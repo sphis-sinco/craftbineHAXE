@@ -1,24 +1,50 @@
 package sphis.craftbine;
 
-import flixel.FlxG;
+import funkin.graphics.shaders.HSVShader;
 import flixel.FlxSprite;
 
 class Block extends FlxSprite
 {
 	public var icon_index:Int = 0;
 
-	override public function new(?x:Float, ?y:Float)
+	public var selected:Bool = false;
+	public var selected_function:Block->Void = null;
+	public var unselected_function:Block->Void = null;
+
+	public static var DEFAULT_SELECTED_FUNCTION:Block->Void = null;
+	public static var DEFAULT_UNSELECTED_FUNCTION:Block->Void = null;
+	public static var BLOCK_COUNT:Int = 0;
+
+	public var hsv_shader:HSVShader;
+
+	override public function new(?x:Float, ?y:Float, ?selected_function:Block->Void, ?unselected_function:Block->Void)
 	{
 		super(x, y);
 
 		loadGraphic('assets/images/blocks.png', true, 16, 16);
 		// animation.pause();
+
+		this.selected_function = selected_function ?? DEFAULT_SELECTED_FUNCTION;
+		this.unselected_function = unselected_function ?? DEFAULT_UNSELECTED_FUNCTION;
+
+		this.setID(BLOCK_COUNT);
+		BLOCK_COUNT++;
+
+		hsv_shader = new HSVShader(1, 1, 1);
+		this.shader = hsv_shader;
 	}
 
 	public function setIconIndex(index:Int):Block
 	{
 		this.icon_index = index;
 		this.animation.frameIndex = this.icon_index;
+
+		return this;
+	}
+
+	public function setID(ID:Int):Block
+	{
+		this.ID = ID;
 		return this;
 	}
 
@@ -26,9 +52,15 @@ class Block extends FlxSprite
 	{
 		super.update(elapsed);
 
-		if (FlxG.mouse.overlaps(this) && FlxG.mouse.pressed)
+		if (selected)
 		{
-			setPosition(FlxG.mouse.x - (this.width / 2), FlxG.mouse.y - (this.height / 2));
+			if (selected_function != null)
+				selected_function(this);
+		}
+		else
+		{
+			if (unselected_function != null)
+				unselected_function(this);
 		}
 	}
 }
