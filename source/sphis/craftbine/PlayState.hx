@@ -10,6 +10,8 @@ class PlayState extends FlxState
 
 	var selected_ID:Int = 0;
 
+	var block_to_place:Block;
+
 	override public function create()
 	{
 		super.create();
@@ -43,18 +45,32 @@ class PlayState extends FlxState
 		var grass_block = new Block('grass_block');
 		var stone_block = new Block('stone');
 
-		grass_block.screenCenter();
-		stone_block.screenCenter();
-		grass_block.x -= grass_block.width;
-		stone_block.x += stone_block.width;
+		grass_block.x += grass_block.width;
+		stone_block.x += stone_block.width * 2;
 
 		blocks.add(grass_block);
 		blocks.add(stone_block);
+
+		block_to_place = new Block('stone');
+		block_to_place.alpha = .5;
+		block_to_place.selected_function = function(block:Block)
+		{
+			Block.DEFAULT_SELECTED_FUNCTION(block);
+
+			if (FlxG.keys.justReleased.ENTER)
+			{
+				var new_block = new Block(block_to_place.block_id, block_to_place.x, block_to_place.y);
+				blocks.add(new_block);
+			}
+		};
+		add(block_to_place);
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		block_to_place.selected = selected_ID == 0;
 
 		if (FlxG.keys.justReleased.TAB)
 		{

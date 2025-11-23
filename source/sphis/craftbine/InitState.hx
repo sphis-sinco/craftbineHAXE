@@ -16,6 +16,16 @@ class InitState extends FlxState
 			block.y -= block.height;
 		if (FlxG.keys.anyJustReleased([S, DOWN]))
 			block.y += block.height;
+
+		if (block.x < 0)
+			block.x += block.width;
+		if (block.x > FlxG.width - block.width)
+			block.x -= block.width - block.width;
+		
+		if (block.y < 0)
+			block.y += block.height;
+		if (block.y > FlxG.height - block.height)
+			block.y -= block.height - block.height;
 	};
 
 	override public function create()

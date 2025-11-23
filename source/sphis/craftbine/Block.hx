@@ -7,6 +7,7 @@ import flixel.FlxSprite;
 class Block extends FlxSprite
 {
 	public var icon_index:Int = 0;
+	public var block_id:String = null;
 
 	public var selected:Bool = false;
 	public var selected_function:Block->Void = null;
@@ -30,8 +31,10 @@ class Block extends FlxSprite
 
 		if (block_id != null)
 		{
+			this.block_id = block_id;
+
 			var block_asset:Array<String> = Assets.getText('assets/blocks/' + block_id + '.txt').split('\n');
-			setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
+			trace(block_asset);
 
 			if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
 			{
@@ -39,8 +42,11 @@ class Block extends FlxSprite
 			}
 			else
 			{
-				loadGraphic('assets/blocks/' + block_id + '.png', true, 16, 16);
+				//								sub_atlas
+				loadGraphic('assets/blocks/' + ((block_asset[2] != null) ? block_asset[2] : block_id) + '.png', true, 16, 16);
 			}
+
+			setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
 		}
 		else
 		{
