@@ -5,6 +5,19 @@ import flixel.FlxG;
 
 class InitState extends FlxState
 {
+	public static var DEFAULT_BLOCK_SELECTED_FUNCTION = function(block:Block)
+	{
+		block.hsv_shader.value = 0.5;
+		if (FlxG.keys.anyJustReleased([A, LEFT]))
+			block.x -= block.width;
+		if (FlxG.keys.anyJustReleased([D, RIGHT]))
+			block.x += block.width;
+		if (FlxG.keys.anyJustReleased([W, UP]))
+			block.y -= block.height;
+		if (FlxG.keys.anyJustReleased([S, DOWN]))
+			block.y += block.height;
+	};
+
 	override public function create()
 	{
 		super.create();
@@ -20,18 +33,7 @@ class InitState extends FlxState
 		{
 			block.hsv_shader.value = 1;
 		}
-		Block.DEFAULT_SELECTED_FUNCTION = function(block:Block)
-		{
-			block.hsv_shader.value = 0.5;
-			if (FlxG.keys.anyJustReleased([A, LEFT]))
-				block.x -= block.width;
-			if (FlxG.keys.anyJustReleased([D, RIGHT]))
-				block.x += block.width;
-			if (FlxG.keys.anyJustReleased([W, UP]))
-				block.y -= block.height;
-			if (FlxG.keys.anyJustReleased([S, DOWN]))
-				block.y += block.height;
-		}
+		Block.DEFAULT_SELECTED_FUNCTION = DEFAULT_BLOCK_SELECTED_FUNCTION;
 
 		FlxG.switchState(() -> new PlayState());
 	}

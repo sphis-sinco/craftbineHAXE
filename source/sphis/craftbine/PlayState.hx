@@ -19,7 +19,7 @@ class PlayState extends FlxState
 
 		Block.DEFAULT_SELECTED_FUNCTION = function(block:Block)
 		{
-			Block.DEFAULT_SELECTED_FUNCTION(block);
+			InitState.DEFAULT_BLOCK_SELECTED_FUNCTION(block);
 
 			for (other_block in blocks.members)
 			{
