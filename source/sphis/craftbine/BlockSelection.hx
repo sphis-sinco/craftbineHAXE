@@ -83,7 +83,7 @@ class BlockSelection extends FlxSubState
 
 		if (FlxG.keys.justReleased.ESCAPE)
 		{
-			Reflect.setField(Reflect.field(this._parentState, 'block_to_place'), 'block_id', selected_ID);
+			Reflect.setField(Reflect.field(this._parentState, 'block_to_place'), 'block_id', selected_block);
 			close();
 		}
 	}
