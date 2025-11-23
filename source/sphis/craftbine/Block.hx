@@ -20,7 +20,7 @@ class Block extends FlxSprite
 
 	static function get_BLOCK_LIST():Array<String>
 	{
-		return #if sys sys.io.File.getContent #else Assets.getText #end('assets/blocks/list.txt').split('\n');
+		return #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/list.txt').split('\n');
 	}
 
 	public var hsv_shader:HSVShader;
@@ -29,20 +29,28 @@ class Block extends FlxSprite
 	{
 		super(x, y);
 
-		if (block_id != null && (#if sys sys.FileSystem.exists #else Assets.exists #end ('assets/blocks/' + block_id + '.txt')))
+		if (block_id != null)
 		{
-			var block_asset:Array<String> = #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/' + block_id + '.txt').split('\n');
-			if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
+			try
+			{
+				var block_asset:Array<String> = #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/data/' + block_id + '.txt')
+					.split('\n');
+				if ((block_asset[1] ?? 'true').toLowerCase() == 'true') // use_atlas
+				{
+					loadGraphic('assets/blocks/atlas.png', true, 16, 16);
+				}
+				else
+				{
+					//								sub_atlas
+					loadGraphic('assets/blocks/' + ((block_asset[2] != null) ? block_asset[2] : block_id) + '.png', true, 16, 16);
+				}
+
+				setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
+			}
+			catch (e)
 			{
 				loadGraphic('assets/blocks/atlas.png', true, 16, 16);
 			}
-			else
-			{
-				//								sub_atlas
-				loadGraphic('assets/blocks/' + ((block_asset[2] != null) ? block_asset[2] : block_id) + '.png', true, 16, 16);
-			}
-
-			setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
 			this.block_id = block_id;
 		}
 		else
