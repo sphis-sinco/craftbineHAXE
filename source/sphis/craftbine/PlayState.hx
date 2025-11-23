@@ -40,8 +40,8 @@ class PlayState extends FlxState
 			}
 		}
 
-		var grass_block = new Block().setIconIndex(0);
-		var stone_block = new Block().setIconIndex(1);
+		var grass_block = new Block('grass_block');
+		var stone_block = new Block('stone');
 
 		grass_block.screenCenter();
 		stone_block.screenCenter();

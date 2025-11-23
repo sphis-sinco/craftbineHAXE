@@ -1,5 +1,6 @@
 package sphis.craftbine;
 
+import lime.utils.Assets;
 import funkin.graphics.shaders.HSVShader;
 import flixel.FlxSprite;
 
@@ -17,12 +18,28 @@ class Block extends FlxSprite
 
 	public var hsv_shader:HSVShader;
 
-	override public function new(?x:Float, ?y:Float, ?selected_function:Block->Void, ?unselected_function:Block->Void)
+	override public function new(?block_id:String, ?x:Float, ?y:Float, ?selected_function:Block->Void, ?unselected_function:Block->Void)
 	{
 		super(x, y);
 
-		loadGraphic('assets/blocks/atlas.png', true, 16, 16);
-		// animation.pause();
+		if (block_id != null)
+		{
+			var block_asset:Array<String> = Assets.getText('assets/blocks/' + block_id + '.txt').split('\n');
+			setIconIndex(Std.parseInt(block_asset[0])); // icon_index
+
+			if (block_asset[1].toLowerCase() == 'true') // use_atlas
+			{
+				loadGraphic('assets/blocks/atlas.png', true, 16, 16);
+			}
+			else
+			{
+				loadGraphic('assets/blocks/' + block_id + '.png', true, 16, 16);
+			}
+		}
+		else
+		{
+			loadGraphic('assets/blocks/atlas.png', true, 16, 16);
+		}
 
 		this.selected_function = selected_function ?? DEFAULT_SELECTED_FUNCTION;
 		this.unselected_function = unselected_function ?? DEFAULT_UNSELECTED_FUNCTION;
