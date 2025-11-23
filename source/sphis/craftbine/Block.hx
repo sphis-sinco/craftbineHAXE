@@ -4,6 +4,8 @@ import lime.utils.Assets;
 import funkin.graphics.shaders.HSVShader;
 import flixel.FlxSprite;
 
+using StringTools;
+
 class Block extends FlxSprite
 {
 	public var icon_index:Int = 0;
@@ -31,6 +33,8 @@ class Block extends FlxSprite
 
 		if (block_id != null)
 		{
+			block_id = block_id.replace('/\\s/g, ', '');
+
 			try
 			{
 				var block_asset:Array<String> = #if sys sys.io.File.getContent #else Assets.getText #end ('assets/blocks/data/' + block_id + '.txt')
