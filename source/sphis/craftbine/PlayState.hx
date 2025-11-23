@@ -42,7 +42,7 @@ class PlayState extends FlxState
 			}
 		}
 
-		var grass_block = new Block('grass_block');
+		var grass_block = new Block('grass');
 		var stone_block = new Block('stone');
 
 		grass_block.x += grass_block.width * 14;
