@@ -35,7 +35,7 @@
 	<source path="source" />
 
 	<assets path="assets" />
-	<assets path="assets/blocks" include="*.txt"/>
+	<assets path="assets/blocks/data/" include="grass.txt"/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 

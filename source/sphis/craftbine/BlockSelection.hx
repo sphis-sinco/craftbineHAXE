@@ -24,6 +24,7 @@ class BlockSelection extends FlxSubState
 
 		var x = 0;
 		var y = 0;
+		var i = 0;
         selected_block = Block.BLOCK_LIST[0];
 		for (block in Block.BLOCK_LIST)
 		{
@@ -32,6 +33,7 @@ class BlockSelection extends FlxSubState
 				block.hsv_shader.value = 0.5;
                 selected_block = block.block_id;
 			});
+			nb.ID = i;
 
             if (nb.block_id != null)
                 blocks.add(nb);
@@ -45,6 +47,7 @@ class BlockSelection extends FlxSubState
 				x = 0;
 				y++;
 			}
+			i++;
 		}
 	}
 

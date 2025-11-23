@@ -46,12 +46,9 @@ class Block extends FlxSprite
 				}
 
 				setIconIndex(Std.parseInt(block_asset[0]) ?? 0); // icon_index
+				this.block_id = block_id;
 			}
-			catch (e)
-			{
-				loadGraphic('assets/blocks/atlas.png', true, 16, 16);
-			}
-			this.block_id = block_id;
+			catch (e) {}
 		}
 		else
 		{
